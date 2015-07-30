@@ -28,6 +28,7 @@
 @property (nonatomic) NSArray *services;
 @property (nonatomic) NSString *phone;   
 @property (nonatomic) NSNumber *distance;
+@property (nonatomic) NSString *title;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

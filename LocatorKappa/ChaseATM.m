@@ -106,4 +106,9 @@
 {
     return ((NSString *)_dictionary[@"lng"]).floatValue;
 }
+
+-(NSString *)title
+{
+    return self.name;
+}
 @end

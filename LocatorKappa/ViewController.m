@@ -14,6 +14,8 @@
 
 #define MILE2METER 1609.3
 #define MAP_REGION_PADDING 100
+#define LEFTCALLOUTACCESSORYVIEW (CGRectMake(0, 0, 50, 50))
+#define GOOGLE_MAP_URL_FORMAT @"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f&directionsmode=driving"
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
@@ -29,6 +31,7 @@
     //self.mapView.delegate = self;
     self.locationManager.delegate = self;
     self.mapView.showsUserLocation = YES;
+    self.mapView.delegate = self;
     
     [self fetchData];
 }
@@ -119,8 +122,8 @@
 
 
 #pragma mark - MapView delegate
-#define LEFTCALLOUTACCESSORYVIEW (CGRectMake(0, 0, 50, 50))
 
+/*
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"ANNON"];
@@ -133,18 +136,18 @@
     annotationView.canShowCallout = YES;
     annotationView.enabled = YES;
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:LEFTCALLOUTACCESSORYVIEW];
-    annotationView.leftCalloutAccessoryView = imageView;
+    //UIImageView *imageView = [[UIImageView alloc] initWithFrame:LEFTCALLOUTACCESSORYVIEW];
+    //annotationView.leftCalloutAccessoryView = imageView;
     
     return annotationView;
 }
+ */
 
-#define GOOGLE_MAP_URL_FORMAT @"http://maps.google.com/maps?saddr=&daddr=%f,%f&directionsmode=driving"
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     if([view.annotation isKindOfClass: [ChaseATM class]]) {
         ChaseATM *targetATM = view.annotation;
-        NSString *urlString = [NSString stringWithFormat:GOOGLE_MAP_URL_FORMAT, targetATM.lat, targetATM.lng];
+        NSString *urlString = [NSString stringWithFormat:GOOGLE_MAP_URL_FORMAT, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude, targetATM.lat, targetATM.lng];
         NSURL *url = [NSURL URLWithString:urlString];
             if([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url];
