@@ -9,6 +9,7 @@
 #import "ATMListTableViewController.h"
 #import "ChaseAPIResult.h"
 #import "ChaseATM.h"
+#import "DetailViewController.h"
 
 @interface ATMListTableViewController ()
 
@@ -87,14 +88,17 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqual:@"toDetail"] && [segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
+        DetailViewController *detailVC = segue.destinationViewController;
+        NSIndexPath* idxPath = [self.tableView indexPathForCell:sender];
+        detailVC.atmInfo = self.results.results[idxPath.row];
+        //idxpath.row is safe!
+    }
+    
 }
-*/
 
 @end

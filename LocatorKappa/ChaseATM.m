@@ -71,4 +71,29 @@
     return _dictionary[@"address"];
 }
 
+-(NSArray *)lobbyHrs
+{
+    return _dictionary[@"lobbyHrs"];
+}
+
+-(NSArray *)driveUpHrs
+{
+    return _dictionary[@"driveUpHrs"];
+}
+
+-(NSNumber *)phone
+{
+    return @(((NSString *)_dictionary[@"phone"]).integerValue);
+}
+
+-(NSNumber *)zip
+{
+    return @(((NSString *)_dictionary[@"zip"]).integerValue);
+}
+
+-(NSString *)state
+{
+    return _dictionary[@"state"];
+}
+
 @end
