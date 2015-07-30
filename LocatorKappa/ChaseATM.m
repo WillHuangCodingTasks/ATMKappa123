@@ -7,6 +7,7 @@
 //
 
 #import "ChaseATM.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface ChaseATM (){
     NSDictionary* _dictionary;
@@ -96,4 +97,13 @@
     return _dictionary[@"state"];
 }
 
+-(float)lat
+{
+    return ((NSString *)_dictionary[@"lat"]).floatValue;
+}
+
+-(float)lng
+{
+    return ((NSString *)_dictionary[@"lng"]).floatValue;
+}
 @end

@@ -119,6 +119,7 @@
 
 
 #pragma mark - MapView delegate
+#define LEFTCALLOUTACCESSORYVIEW (CGRectMake(0, 0, 50, 50))
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -130,8 +131,25 @@
         annotationView.annotation = annotation;
     }
     annotationView.canShowCallout = YES;
+    annotationView.enabled = YES;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:LEFTCALLOUTACCESSORYVIEW];
+    annotationView.leftCalloutAccessoryView = imageView;
     
     return annotationView;
+}
+
+#define GOOGLE_MAP_URL_FORMAT @"http://maps.google.com/maps?saddr=&daddr=%f,%f&directionsmode=driving"
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    if([view.annotation isKindOfClass: [ChaseATM class]]) {
+        ChaseATM *targetATM = view.annotation;
+        NSString *urlString = [NSString stringWithFormat:GOOGLE_MAP_URL_FORMAT, targetATM.lat, targetATM.lng];
+        NSURL *url = [NSURL URLWithString:urlString];
+            if([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
 }
 
 
