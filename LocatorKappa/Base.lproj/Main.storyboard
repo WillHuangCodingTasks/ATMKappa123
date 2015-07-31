@@ -57,13 +57,13 @@
         <!--Title-->
         <scene sceneID="yy3-RD-co8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pj7-Bl-Cpz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Cad-m0-0bl" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lDz-Nw-hdh"/>
                         <viewControllerLayoutGuide type="bottom" id="Di5-vk-22J"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xm8-Ch-ldv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hT3-Xr-Qf9">
@@ -468,6 +468,7 @@
                         <outletCollection property="driveupHours" destination="krb-Ju-cEq" id="fI9-b6-EbT"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pj7-Bl-Cpz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1165.5" y="310"/>
         </scene>
@@ -476,6 +477,7 @@
             <objects>
                 <tableViewController id="69t-hi-MVj" customClass="ATMListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PiZ-ST-7HP">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

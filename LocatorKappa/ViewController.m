@@ -14,7 +14,7 @@
 
 #define MILE2METER 1609.3
 #define MAP_REGION_PADDING 100
-#define LEFTCALLOUTACCESSORYVIEW (CGRectMake(0, 0, 50, 50))
+#define CALLOUTACCESSORYVIEW_RECT (CGRectMake(0, 0, 50, 50))
 #define GOOGLE_MAP_URL_FORMAT @"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f&directionsmode=driving"
 
 @interface ViewController ()
@@ -28,10 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.mapView.delegate = self;
+    self.mapView.delegate = self;
     self.locationManager.delegate = self;
     self.mapView.showsUserLocation = YES;
-    self.mapView.delegate = self;
     
     [self fetchData];
 }
@@ -123,12 +122,11 @@
 
 #pragma mark - MapView delegate
 
-/*
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"ANNON"];
     if (!annotationView) {
-        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
                                                       reuseIdentifier:@"ANNON"];
     } else {
         annotationView.annotation = annotation;
@@ -136,23 +134,34 @@
     annotationView.canShowCallout = YES;
     annotationView.enabled = YES;
     
-    //UIImageView *imageView = [[UIImageView alloc] initWithFrame:LEFTCALLOUTACCESSORYVIEW];
-    //annotationView.leftCalloutAccessoryView = imageView;
+    //accessory view
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    button.frame = CALLOUTACCESSORYVIEW_RECT;
+    annotationView.rightCalloutAccessoryView = button;
+    button.tag = [self.mapView.annotations indexOfObject:annotation];
+    [button addTarget:self action:@selector(accessoryButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
     return annotationView;
 }
- */
 
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+-(IBAction)accessoryButtonPress:(UIButton *)sender
 {
-    if([view.annotation isKindOfClass: [ChaseATM class]]) {
-        ChaseATM *targetATM = view.annotation;
-        NSString *urlString = [NSString stringWithFormat:GOOGLE_MAP_URL_FORMAT, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude, targetATM.lat, targetATM.lng];
-        NSURL *url = [NSURL URLWithString:urlString];
-            if([[UIApplication sharedApplication] canOpenURL:url]) {
-            [[UIApplication sharedApplication] openURL:url];
-        }
+    if (sender.tag == NSNotFound)
+        return;
+    ChaseATM *atm = self.mapView.annotations[sender.tag];
+    if ([atm isKindOfClass:[ChaseATM class]]) {
+        CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(atm.lat, atm.lng);
+        [self navigateWithLocation:loc];
     }
+    
+}
+
+-(void)navigateWithLocation:(CLLocationCoordinate2D)location
+{
+    NSString *urlString = [NSString stringWithFormat:GOOGLE_MAP_URL_FORMAT, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude, location.latitude, location.longitude];
+    NSURL *url = [NSURL URLWithString:urlString];
+    if([[UIApplication sharedApplication] canOpenURL:url])
+        [[UIApplication sharedApplication] openURL:url];
 }
 
 

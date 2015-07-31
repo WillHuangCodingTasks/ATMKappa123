@@ -48,7 +48,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
     ChaseATM* thisATM = self.results.results[indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ mi %@, %@", thisATM.distance, thisATM.locType, thisATM.name];
+    cell.textLabel.text = [NSString stringWithFormat:@"%.2f mi %@, %@", thisATM.distance.floatValue, thisATM.locType, thisATM.name];
     cell.detailTextLabel.text = thisATM.address;
     
     return cell;

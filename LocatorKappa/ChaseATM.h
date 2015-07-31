@@ -28,7 +28,8 @@
 @property (nonatomic) NSArray *services;
 @property (nonatomic) NSString *phone;   
 @property (nonatomic) NSNumber *distance;
-@property (nonatomic) NSString *title;
+@property (nonatomic, readonly, copy) NSString *title;
+@property (nonatomic, readonly, copy) NSString *subtitle;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -111,4 +111,9 @@
 {
     return self.name;
 }
+
+-(NSString *)subtitle
+{
+    return [NSString stringWithFormat:@"%.2f mi %@", self.distance.floatValue, self.locType];
+}
 @end
