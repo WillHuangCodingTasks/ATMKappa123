@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9518A7CA-8ED0-4A35-B4C5-B416B32685F4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LocatorKappa</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F1652AEE1781A8F2BA5A8FA072712F2F7093A3F0</key>
+		<string>https://github.com/WillHuangCodingTasks/ATMKappa123.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LocatorKappa.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F1652AEE1781A8F2BA5A8FA072712F2F7093A3F0</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/WillHuangCodingTasks/ATMKappa123.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F1652AEE1781A8F2BA5A8FA072712F2F7093A3F0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F1652AEE1781A8F2BA5A8FA072712F2F7093A3F0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LocatorKappa</string>
+		</dict>
+	</array>
+</dict>
+</plist>
