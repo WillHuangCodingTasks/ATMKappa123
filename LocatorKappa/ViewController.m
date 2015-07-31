@@ -37,10 +37,8 @@
 
 -(void)fetchData
 {
-    if (self.atmTVC) {
-        [self.atmTVC.refreshControl beginRefreshing];
-    }
     [self requestAuthorization];
+    [self.atmTVC.refreshControl beginRefreshing];
     [self.locationManager startUpdatingLocation];
 }
 
@@ -135,6 +133,7 @@
     if([annotation isKindOfClass: [MKUserLocation class]])
         return nil;//don't override the blue beacon!
     
+    //init && reuse
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"ANNON"];
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
@@ -151,6 +150,7 @@
     button.frame = CALLOUTACCESSORYVIEW_RECT;
     annotationView.rightCalloutAccessoryView = button;
     button.tag = [self.mapView.annotations indexOfObject:annotation];
+    //user button tag to pass index
     [button addTarget:self action:@selector(accessoryButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
     return annotationView;
@@ -167,6 +167,7 @@
 }
 
 -(void)navigateWithLocation:(CLLocationCoordinate2D)location
+//Open Google map in the browser
 {
     NSString *urlString = [NSString stringWithFormat:GOOGLE_MAP_URL_FORMAT, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude, location.latitude, location.longitude];
     NSURL *url = [NSURL URLWithString:urlString];

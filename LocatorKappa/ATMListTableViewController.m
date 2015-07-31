@@ -28,14 +28,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.refreshControl = [UIRefreshControl new];
     [self.tableView addSubview: self.refreshControl];
-    [self.refreshControl addTarget:self action:@selector(updateTable) forControlEvents:UIControlEventValueChanged];
-}
-
--(void)updateTable
-{
-    if (self.mainVC) {
-        [self.mainVC fetchData];
-    }
+    
+    [self.refreshControl addTarget:self.mainVC action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark - Table view data source

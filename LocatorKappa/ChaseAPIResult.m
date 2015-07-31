@@ -26,12 +26,18 @@
         NSURL *requestURL = [NSURL URLWithString: urlstring];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        //bad
+        //sync is fine I guess
         NSDictionary *rawData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
         if (!rawData || ((NSArray *)rawData[@"error"]).count) {
             NSLog(@"Chase API init error: %@, lag = %@, lng = %@", (NSArray *)rawData[@"error"], lat, lng);
             //fixme
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network Error"
+                                                                message:@"Unable to get data from Chase. Check your Internet connection please."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Cancel"
+                                                      otherButtonTitles:nil];
+            [alertView show];
             return nil;
         }
         
@@ -42,10 +48,7 @@
         
         
         _furthestDistance =[rawData valueForKeyPath:@"locations.@max.distance"];
-#undef DEBUG
-#ifdef DEBUG
-        NSLog(@"API results = %@", _results);
-#endif
+        //or you can simply return the last object?
     }
     return self;
 }
