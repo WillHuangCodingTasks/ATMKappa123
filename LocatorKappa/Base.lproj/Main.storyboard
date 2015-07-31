@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,31 +19,65 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="90m-jW-mjI">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="20" width="400" height="382"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="90m-jW-mjI" secondAttribute="height" multiplier="200:191" id="CGM-6g-cyr"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="CGM-6g-cyr"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="CGM-6g-cyr"/>
+                                    </mask>
                                 </variation>
                             </mapView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6EC-My-CTo">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="403" width="400" height="197"/>
-                                </variation>
                                 <connections>
                                     <segue destination="69t-hi-MVj" kind="embed" identifier="EmbeddedListSegue" id="MpP-1s-1uq"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6EC-My-CTo" firstAttribute="top" secondItem="90m-jW-mjI" secondAttribute="bottom" id="43C-XT-ECA"/>
+                            <constraint firstAttribute="trailing" secondItem="6EC-My-CTo" secondAttribute="trailing" id="Iob-Fk-U7E"/>
+                            <constraint firstAttribute="trailing" secondItem="90m-jW-mjI" secondAttribute="trailing" id="KyG-bV-3oV"/>
+                            <constraint firstItem="90m-jW-mjI" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Wuy-Nh-NTM"/>
+                            <constraint firstItem="6EC-My-CTo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="a4r-uf-p4X"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="6EC-My-CTo" secondAttribute="bottom" id="a9c-RH-GsV"/>
+                            <constraint firstItem="90m-jW-mjI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="nAx-ff-Xn3"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="90m-jW-mjI"/>
                                 <exclude reference="6EC-My-CTo"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="KyG-bV-3oV"/>
+                                <exclude reference="Wuy-Nh-NTM"/>
+                                <exclude reference="nAx-ff-Xn3"/>
+                                <exclude reference="43C-XT-ECA"/>
+                                <exclude reference="Iob-Fk-U7E"/>
+                                <exclude reference="a4r-uf-p4X"/>
+                                <exclude reference="a9c-RH-GsV"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="90m-jW-mjI"/>
                                 <include reference="6EC-My-CTo"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="KyG-bV-3oV"/>
+                                <include reference="Wuy-Nh-NTM"/>
+                                <include reference="nAx-ff-Xn3"/>
+                                <include reference="43C-XT-ECA"/>
+                                <include reference="Iob-Fk-U7E"/>
+                                <include reference="a4r-uf-p4X"/>
+                                <include reference="a9c-RH-GsV"/>
                             </mask>
                         </variation>
                     </view>

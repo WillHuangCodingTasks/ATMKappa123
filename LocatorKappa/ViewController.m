@@ -37,6 +37,9 @@
 
 -(void)fetchData
 {
+    if (self.atmTVC) {
+        [self.atmTVC.refreshControl beginRefreshing];
+    }
     [self requestAuthorization];
     [self.locationManager startUpdatingLocation];
 }
@@ -114,8 +117,13 @@
     
     
     //MKAnnotation
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
     [self.mapView addAnnotations:results.results];
+    
+    //info passing
     self.atmTVC.results = results;
+    [self.atmTVC.refreshControl endRefreshing];
     [self.atmTVC.tableView reloadData];
 }
 
@@ -124,6 +132,9 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    if([annotation isKindOfClass: [MKUserLocation class]])
+        return nil;//don't override the blue beacon!
+    
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"ANNON"];
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
@@ -131,6 +142,7 @@
     } else {
         annotationView.annotation = annotation;
     }
+    
     annotationView.canShowCallout = YES;
     annotationView.enabled = YES;
     
@@ -148,12 +160,10 @@
 {
     if (sender.tag == NSNotFound)
         return;
-    ChaseATM *atm = self.mapView.annotations[sender.tag];
-    if ([atm isKindOfClass:[ChaseATM class]]) {
-        CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(atm.lat, atm.lng);
-        [self navigateWithLocation:loc];
-    }
     
+    id<MKAnnotation> atm = self.mapView.annotations[sender.tag];
+    if([atm conformsToProtocol:@protocol(MKAnnotation)])
+        [self navigateWithLocation:atm.coordinate];
 }
 
 -(void)navigateWithLocation:(CLLocationCoordinate2D)location
@@ -172,6 +182,7 @@
         ATMListTableViewController* atmTVC = segue.destinationViewController;
         if ([atmTVC isKindOfClass:[ATMListTableViewController class]]) {
             self.atmTVC = atmTVC;
+            atmTVC.mainVC = self;
         }
     }
 }

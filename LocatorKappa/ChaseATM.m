@@ -16,23 +16,7 @@
 @end
 
 @implementation ChaseATM
-@dynamic state;
-@dynamic locType; 
-@dynamic label;   
-@dynamic address; 
-@dynamic city;    
-@dynamic zip;     
-@dynamic name;    
-@dynamic lat;     
-@dynamic lng;     
-@dynamic bank;    
-@dynamic type;    
-@dynamic lobbyHrs;
-@dynamic driveUpHrs;
-@dynamic atms;    
-@dynamic services;
-@dynamic phone;   
-@dynamic distance;
+
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
@@ -95,16 +79,6 @@
 -(NSString *)state
 {
     return _dictionary[@"state"];
-}
-
--(float)lat
-{
-    return ((NSString *)_dictionary[@"lat"]).floatValue;
-}
-
--(float)lng
-{
-    return ((NSString *)_dictionary[@"lng"]).floatValue;
 }
 
 -(NSString *)title

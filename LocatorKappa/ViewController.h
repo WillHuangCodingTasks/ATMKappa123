@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) ATMListTableViewController* atmTVC;
 
+-(void)fetchData;
+
 @end

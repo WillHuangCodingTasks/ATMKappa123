@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class ChaseAPIResult;
+@class ViewController;
 @interface ATMListTableViewController : UITableViewController
 
 @property (nonatomic) ChaseAPIResult* results;
+@property (nonatomic, weak) ViewController* mainVC;
 
 @end
